@@ -297,6 +297,7 @@
     <ClInclude Include="Source\Renderer.h" />
     <ClInclude Include="Source\Shader.h" />
     <ClInclude Include="Source\tests\TestClearColor.h" />
+    <ClInclude Include="Source\tests\TestDannyDevito.h" />
     <ClInclude Include="Source\Texture.h" />
     <ClInclude Include="Source\vendor\glm\common.hpp" />
     <ClInclude Include="Source\vendor\glm\detail\compute_common.hpp" />

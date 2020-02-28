@@ -1256,5 +1256,8 @@
     <ClInclude Include="Source\tests\Test.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\tests\TestDannyDevito.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
