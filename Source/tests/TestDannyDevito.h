@@ -4,13 +4,13 @@
 #include "VertexArray.h"
 #include "Texture.h"
 
-namespace test 
+namespace test
 {
 	class TestDannyDevito : public Test
 	{
 	private:
 		Shader shader;
-		unsigned int *positions;
+		unsigned int* positions;
 		Texture texture[2];
 
 	public:
@@ -20,8 +20,5 @@ namespace test
 		void OnUpdate(float deltaTime) override;
 		void OnRender() override;
 		void OnImGuiRender() override;
-
-		
-
 	};
 }

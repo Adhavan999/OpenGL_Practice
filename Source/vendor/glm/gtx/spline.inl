@@ -10,7 +10,7 @@ namespace glm
 		genType const& v3,
 		genType const& v4,
 		typename genType::value_type const& s
-	)
+		)
 	{
 		typename genType::value_type s2 = pow2(s);
 		typename genType::value_type s3 = pow3(s);
@@ -21,7 +21,6 @@ namespace glm
 		typename genType::value_type f4 = s3 - s2;
 
 		return (f1 * v1 + f2 * v2 + f3 * v3 + f4 * v4) / typename genType::value_type(2);
-
 	}
 
 	template<typename genType>
@@ -32,7 +31,7 @@ namespace glm
 		genType const& v2,
 		genType const& t2,
 		typename genType::value_type const& s
-	)
+		)
 	{
 		typename genType::value_type s2 = pow2(s);
 		typename genType::value_type s3 = pow3(s);
@@ -53,7 +52,7 @@ namespace glm
 		genType const& v3,
 		genType const& v4,
 		typename genType::value_type const& s
-	)
+		)
 	{
 		return ((v1 * s + v2) * s + v3) * s + v4;
 	}

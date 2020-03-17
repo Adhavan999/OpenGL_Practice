@@ -539,33 +539,33 @@
 #include <limits>
 
 namespace glm {
-namespace std {
-	// Import SYCL's functions into the namespace glm::std to force their usages.
-	// It's important to use the math built-in function (sin, exp, ...)
-	// of SYCL instead the std ones.
-	using namespace cl::sycl;
+	namespace std {
+		// Import SYCL's functions into the namespace glm::std to force their usages.
+		// It's important to use the math built-in function (sin, exp, ...)
+		// of SYCL instead the std ones.
+		using namespace cl::sycl;
 
-	///////////////////////////////////////////////////////////////////////////////
-	// Import some "harmless" std's stuffs used by glm into
-	// the new glm::std namespace.
-	template<typename T>
-	using numeric_limits = ::std::numeric_limits<T>;
+		///////////////////////////////////////////////////////////////////////////////
+		// Import some "harmless" std's stuffs used by glm into
+		// the new glm::std namespace.
+		template<typename T>
+		using numeric_limits = ::std::numeric_limits<T>;
 
-	using ::std::size_t;
+		using ::std::size_t;
 
-	using ::std::uint8_t;
-	using ::std::uint16_t;
-	using ::std::uint32_t;
-	using ::std::uint64_t;
+		using ::std::uint8_t;
+		using ::std::uint16_t;
+		using ::std::uint32_t;
+		using ::std::uint64_t;
 
-	using ::std::int8_t;
-	using ::std::int16_t;
-	using ::std::int32_t;
-	using ::std::int64_t;
+		using ::std::int8_t;
+		using ::std::int16_t;
+		using ::std::int32_t;
+		using ::std::int64_t;
 
-	using ::std::make_unsigned;
-	///////////////////////////////////////////////////////////////////////////////
-} //namespace std
+		using ::std::make_unsigned;
+		///////////////////////////////////////////////////////////////////////////////
+	} //namespace std
 } //namespace glm
 
 #endif
@@ -590,9 +590,9 @@ namespace glm
 {
 	using std::size_t;
 #	if GLM_CONFIG_LENGTH_TYPE == GLM_LENGTH_SIZE_T
-		typedef size_t length_t;
+	typedef size_t length_t;
 #	else
-		typedef int length_t;
+	typedef int length_t;
 #	endif
 }//namespace glm
 
@@ -602,14 +602,14 @@ namespace glm
 #if GLM_HAS_CONSTEXPR
 #	define GLM_CONFIG_CONSTEXP GLM_ENABLE
 
-	namespace glm
+namespace glm
+{
+	template<typename T, std::size_t N>
+	constexpr std::size_t countof(T const (&)[N])
 	{
-		template<typename T, std::size_t N>
-		constexpr std::size_t countof(T const (&)[N])
-		{
-			return N;
-		}
-	}//namespace glm
+		return N;
+	}
+}//namespace glm
 #	define GLM_COUNTOF(arr) glm::countof(arr)
 #elif defined(_MSC_VER)
 #	define GLM_CONFIG_CONSTEXP GLM_DISABLE
@@ -624,27 +624,27 @@ namespace glm
 ///////////////////////////////////////////////////////////////////////////////////
 // uint
 
-namespace glm{
-namespace detail
-{
-	template<typename T>
-	struct is_int
+namespace glm {
+	namespace detail
 	{
-		enum test {value = 0};
-	};
+		template<typename T>
+		struct is_int
+		{
+			enum test { value = 0 };
+		};
 
-	template<>
-	struct is_int<unsigned int>
-	{
-		enum test {value = ~0};
-	};
+		template<>
+		struct is_int<unsigned int>
+		{
+			enum test { value = ~0 };
+		};
 
-	template<>
-	struct is_int<signed int>
-	{
-		enum test {value = ~0};
-	};
-}//namespace detail
+		template<>
+		struct is_int<signed int>
+		{
+			enum test { value = ~0 };
+		};
+	}//namespace detail
 
 	typedef unsigned int	uint;
 }//namespace glm
@@ -656,9 +656,9 @@ namespace detail
 #	include <cstdint>
 #endif
 
-namespace glm{
-namespace detail
-{
+namespace glm {
+	namespace detail
+	{
 #	if GLM_HAS_EXTENDED_INTEGER_TYPE
 		typedef std::uint64_t						uint64;
 		typedef std::int64_t						int64;
@@ -680,7 +680,7 @@ namespace detail
 		typedef unsigned long long					uint64;
 		typedef signed long long					int64;
 #	endif
-}//namespace detail
+	}//namespace detail
 }//namespace glm
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -689,88 +689,88 @@ namespace detail
 #if GLM_HAS_MAKE_SIGNED
 #	include <type_traits>
 
-namespace glm{
-namespace detail
-{
-	using std::make_unsigned;
-}//namespace detail
+namespace glm {
+	namespace detail
+	{
+		using std::make_unsigned;
+	}//namespace detail
 }//namespace glm
 
 #else
 
-namespace glm{
-namespace detail
-{
-	template<typename genType>
-	struct make_unsigned
-	{};
-
-	template<>
-	struct make_unsigned<char>
+namespace glm {
+	namespace detail
 	{
-		typedef unsigned char type;
-	};
+		template<typename genType>
+		struct make_unsigned
+		{};
 
-	template<>
-	struct make_unsigned<signed char>
-	{
-		typedef unsigned char type;
-	};
+		template<>
+		struct make_unsigned<char>
+		{
+			typedef unsigned char type;
+		};
 
-	template<>
-	struct make_unsigned<short>
-	{
-		typedef unsigned short type;
-	};
+		template<>
+		struct make_unsigned<signed char>
+		{
+			typedef unsigned char type;
+		};
 
-	template<>
-	struct make_unsigned<int>
-	{
-		typedef unsigned int type;
-	};
+		template<>
+		struct make_unsigned<short>
+		{
+			typedef unsigned short type;
+		};
 
-	template<>
-	struct make_unsigned<long>
-	{
-		typedef unsigned long type;
-	};
+		template<>
+		struct make_unsigned<int>
+		{
+			typedef unsigned int type;
+		};
 
-	template<>
-	struct make_unsigned<int64>
-	{
-		typedef uint64 type;
-	};
+		template<>
+		struct make_unsigned<long>
+		{
+			typedef unsigned long type;
+		};
 
-	template<>
-	struct make_unsigned<unsigned char>
-	{
-		typedef unsigned char type;
-	};
+		template<>
+		struct make_unsigned<int64>
+		{
+			typedef uint64 type;
+		};
 
-	template<>
-	struct make_unsigned<unsigned short>
-	{
-		typedef unsigned short type;
-	};
+		template<>
+		struct make_unsigned<unsigned char>
+		{
+			typedef unsigned char type;
+		};
 
-	template<>
-	struct make_unsigned<unsigned int>
-	{
-		typedef unsigned int type;
-	};
+		template<>
+		struct make_unsigned<unsigned short>
+		{
+			typedef unsigned short type;
+		};
 
-	template<>
-	struct make_unsigned<unsigned long>
-	{
-		typedef unsigned long type;
-	};
+		template<>
+		struct make_unsigned<unsigned int>
+		{
+			typedef unsigned int type;
+		};
 
-	template<>
-	struct make_unsigned<uint64>
-	{
-		typedef uint64 type;
-	};
-}//namespace detail
+		template<>
+		struct make_unsigned<unsigned long>
+		{
+			typedef unsigned long type;
+		};
+
+		template<>
+		struct make_unsigned<uint64>
+		{
+			typedef uint64 type;
+		};
+	}//namespace detail
 }//namespace glm
 #endif
 

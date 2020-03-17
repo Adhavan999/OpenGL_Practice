@@ -6,12 +6,12 @@ namespace glm
 	GLM_FUNC_QUALIFIER vec<3, T, Q> rgb2YCoCg
 	(
 		vec<3, T, Q> const& rgbColor
-	)
+		)
 	{
 		vec<3, T, Q> result;
-		result.x/*Y */ =   rgbColor.r / T(4) + rgbColor.g / T(2) + rgbColor.b / T(4);
-		result.y/*Co*/ =   rgbColor.r / T(2) + rgbColor.g * T(0) - rgbColor.b / T(2);
-		result.z/*Cg*/ = - rgbColor.r / T(4) + rgbColor.g / T(2) - rgbColor.b / T(4);
+		result.x/*Y */ = rgbColor.r / T(4) + rgbColor.g / T(2) + rgbColor.b / T(4);
+		result.y/*Co*/ = rgbColor.r / T(2) + rgbColor.g * T(0) - rgbColor.b / T(2);
+		result.z/*Cg*/ = -rgbColor.r / T(4) + rgbColor.g / T(2) - rgbColor.b / T(4);
 		return result;
 	}
 
@@ -19,11 +19,11 @@ namespace glm
 	GLM_FUNC_QUALIFIER vec<3, T, Q> YCoCg2rgb
 	(
 		vec<3, T, Q> const& YCoCgColor
-	)
+		)
 	{
 		vec<3, T, Q> result;
 		result.r = YCoCgColor.x + YCoCgColor.y - YCoCgColor.z;
-		result.g = YCoCgColor.x				   + YCoCgColor.z;
+		result.g = YCoCgColor.x + YCoCgColor.z;
 		result.b = YCoCgColor.x - YCoCgColor.y - YCoCgColor.z;
 		return result;
 	}
@@ -34,7 +34,7 @@ namespace glm
 		static GLM_FUNC_QUALIFIER vec<3, T, Q> rgb2YCoCgR
 		(
 			vec<3, T, Q> const& rgbColor
-		)
+			)
 		{
 			vec<3, T, Q> result;
 			result.x/*Y */ = rgbColor.g * static_cast<T>(0.5) + (rgbColor.r + rgbColor.b) * static_cast<T>(0.25);
@@ -46,7 +46,7 @@ namespace glm
 		static GLM_FUNC_QUALIFIER vec<3, T, Q> YCoCgR2rgb
 		(
 			vec<3, T, Q> const& YCoCgRColor
-		)
+			)
 		{
 			vec<3, T, Q> result;
 			T tmp = YCoCgRColor.x - (YCoCgRColor.z * static_cast<T>(0.5));
@@ -63,7 +63,7 @@ namespace glm
 		static GLM_FUNC_QUALIFIER vec<3, T, Q> rgb2YCoCgR
 		(
 			vec<3, T, Q> const& rgbColor
-		)
+			)
 		{
 			vec<3, T, Q> result;
 			result.y/*Co*/ = rgbColor.r - rgbColor.b;
@@ -76,7 +76,7 @@ namespace glm
 		static GLM_FUNC_QUALIFIER vec<3, T, Q> YCoCgR2rgb
 		(
 			vec<3, T, Q> const& YCoCgRColor
-		)
+			)
 		{
 			vec<3, T, Q> result;
 			T tmp = YCoCgRColor.x - (YCoCgRColor.z >> 1);
@@ -91,7 +91,7 @@ namespace glm
 	GLM_FUNC_QUALIFIER vec<3, T, Q> rgb2YCoCgR
 	(
 		vec<3, T, Q> const& rgbColor
-	)
+		)
 	{
 		return compute_YCoCgR<T, Q, std::numeric_limits<T>::is_integer>::rgb2YCoCgR(rgbColor);
 	}
@@ -100,7 +100,7 @@ namespace glm
 	GLM_FUNC_QUALIFIER vec<3, T, Q> YCoCgR2rgb
 	(
 		vec<3, T, Q> const& YCoCgRColor
-	)
+		)
 	{
 		return compute_YCoCgR<T, Q, std::numeric_limits<T>::is_integer>::YCoCgR2rgb(YCoCgRColor);
 	}

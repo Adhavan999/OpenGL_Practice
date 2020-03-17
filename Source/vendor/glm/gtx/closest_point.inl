@@ -8,7 +8,7 @@ namespace glm
 		vec<3, T, Q> const& point,
 		vec<3, T, Q> const& a,
 		vec<3, T, Q> const& b
-	)
+		)
 	{
 		T LineLength = distance(a, b);
 		vec<3, T, Q> Vector = point - a;
@@ -17,8 +17,8 @@ namespace glm
 		// Project Vector to LineDirection to get the distance of point from a
 		T Distance = dot(Vector, LineDirection);
 
-		if(Distance <= T(0)) return a;
-		if(Distance >= LineLength) return b;
+		if (Distance <= T(0)) return a;
+		if (Distance >= LineLength) return b;
 		return a + LineDirection * Distance;
 	}
 
@@ -28,7 +28,7 @@ namespace glm
 		vec<2, T, Q> const& point,
 		vec<2, T, Q> const& a,
 		vec<2, T, Q> const& b
-	)
+		)
 	{
 		T LineLength = distance(a, b);
 		vec<2, T, Q> Vector = point - a;
@@ -37,9 +37,8 @@ namespace glm
 		// Project Vector to LineDirection to get the distance of point from a
 		T Distance = dot(Vector, LineDirection);
 
-		if(Distance <= T(0)) return a;
-		if(Distance >= LineLength) return b;
+		if (Distance <= T(0)) return a;
+		if (Distance >= LineLength) return b;
 		return a + LineDirection * Distance;
 	}
-
 }//namespace glm

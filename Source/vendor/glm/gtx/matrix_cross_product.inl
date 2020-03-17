@@ -6,7 +6,7 @@ namespace glm
 	GLM_FUNC_QUALIFIER mat<3, 3, T, Q> matrixCross3
 	(
 		vec<3, T, Q> const& x
-	)
+		)
 	{
 		mat<3, 3, T, Q> Result(T(0));
 		Result[0][1] = x.z;
@@ -22,7 +22,7 @@ namespace glm
 	GLM_FUNC_QUALIFIER mat<4, 4, T, Q> matrixCross4
 	(
 		vec<3, T, Q> const& x
-	)
+		)
 	{
 		mat<4, 4, T, Q> Result(T(0));
 		Result[0][1] = x.z;
@@ -33,5 +33,4 @@ namespace glm
 		Result[2][1] = -x.x;
 		return Result;
 	}
-
 }//namespace glm

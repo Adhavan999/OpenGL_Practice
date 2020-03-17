@@ -7,7 +7,7 @@ namespace glm
 	(
 		vec<2, T, Q> const& v1,
 		vec<2, T, Q> const& v2
-	)
+		)
 	{
 		mat<2, 2, T, Q> Result;
 		Result[0][0] = v1.x;

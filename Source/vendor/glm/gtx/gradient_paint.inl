@@ -9,7 +9,7 @@ namespace glm
 		T const& Radius,
 		vec<2, T, Q> const& Focal,
 		vec<2, T, Q> const& Position
-	)
+		)
 	{
 		vec<2, T, Q> F = Focal - Center;
 		vec<2, T, Q> D = Position - Focal;
@@ -28,7 +28,7 @@ namespace glm
 		vec<2, T, Q> const& Point0,
 		vec<2, T, Q> const& Point1,
 		vec<2, T, Q> const& Position
-	)
+		)
 	{
 		vec<2, T, Q> Dist = Point1 - Point0;
 		return (Dist.x * (Position.x - Point0.x) + Dist.y * (Position.y - Point0.y)) / glm::dot(Dist, Dist);

@@ -7,7 +7,7 @@ namespace glm
 	(
 		T const& x,
 		T const& y
-	)
+		)
 	{
 		return x < y;
 	}
@@ -17,7 +17,7 @@ namespace glm
 	(
 		T const& x,
 		T const& y
-	)
+		)
 	{
 		return x <= y;
 	}
@@ -27,7 +27,7 @@ namespace glm
 	(
 		T const& x,
 		T const& y
-	)
+		)
 	{
 		return x > y;
 	}
@@ -37,7 +37,7 @@ namespace glm
 	(
 		T const& x,
 		T const& y
-	)
+		)
 	{
 		return x >= y;
 	}
@@ -47,7 +47,7 @@ namespace glm
 	(
 		T const& x,
 		T const& y
-	)
+		)
 	{
 		return detail::compute_equal<T, std::numeric_limits<T>::is_iec559>::call(x, y);
 	}
@@ -57,7 +57,7 @@ namespace glm
 	(
 		T const& x,
 		T const& y
-	)
+		)
 	{
 		return !detail::compute_equal<T, std::numeric_limits<T>::is_iec559>::call(x, y);
 	}
@@ -65,7 +65,7 @@ namespace glm
 	GLM_FUNC_QUALIFIER bool any
 	(
 		bool const& x
-	)
+		)
 	{
 		return x;
 	}
@@ -73,7 +73,7 @@ namespace glm
 	GLM_FUNC_QUALIFIER bool all
 	(
 		bool const& x
-	)
+		)
 	{
 		return x;
 	}
@@ -81,7 +81,7 @@ namespace glm
 	GLM_FUNC_QUALIFIER bool not_
 	(
 		bool const& x
-	)
+		)
 	{
 		return !x;
 	}

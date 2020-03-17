@@ -12,7 +12,7 @@ namespace glm
 		float const& x,
 		float const& y,
 		float const& epsilon
-	)
+		)
 	{
 		return abs(x - y) < epsilon;
 	}
@@ -23,7 +23,7 @@ namespace glm
 		double const& x,
 		double const& y,
 		double const& epsilon
-	)
+		)
 	{
 		return abs(x - y) < epsilon;
 	}

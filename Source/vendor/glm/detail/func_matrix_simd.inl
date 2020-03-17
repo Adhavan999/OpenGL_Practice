@@ -5,58 +5,58 @@
 #include "../simd/matrix.h"
 #include <cstring>
 
-namespace glm{
-namespace detail
-{
-#	if GLM_CONFIG_ALIGNED_GENTYPES == GLM_ENABLE
-	template<qualifier Q>
-	struct compute_matrixCompMult<4, 4, float, Q, true>
+namespace glm {
+	namespace detail
 	{
-		GLM_STATIC_ASSERT(detail::is_aligned<Q>::value, "Specialization requires aligned");
-
-		GLM_FUNC_QUALIFIER static mat<4, 4, float, Q> call(mat<4, 4, float, Q> const& x, mat<4, 4, float, Q> const& y)
+#	if GLM_CONFIG_ALIGNED_GENTYPES == GLM_ENABLE
+		template<qualifier Q>
+		struct compute_matrixCompMult<4, 4, float, Q, true>
 		{
-			mat<4, 4, float, Q> Result;
-			glm_mat4_matrixCompMult(
-				*static_cast<glm_vec4 const (*)[4]>(&x[0].data),
-				*static_cast<glm_vec4 const (*)[4]>(&y[0].data),
-				*static_cast<glm_vec4(*)[4]>(&Result[0].data));
-			return Result;
-		}
-	};
+			GLM_STATIC_ASSERT(detail::is_aligned<Q>::value, "Specialization requires aligned");
+
+			GLM_FUNC_QUALIFIER static mat<4, 4, float, Q> call(mat<4, 4, float, Q> const& x, mat<4, 4, float, Q> const& y)
+			{
+				mat<4, 4, float, Q> Result;
+				glm_mat4_matrixCompMult(
+					*static_cast<glm_vec4 const (*)[4]>(&x[0].data),
+					*static_cast<glm_vec4 const (*)[4]>(&y[0].data),
+					*static_cast<glm_vec4(*)[4]>(&Result[0].data));
+				return Result;
+			}
+		};
 #	endif
 
-	template<qualifier Q>
-	struct compute_transpose<4, 4, float, Q, true>
-	{
-		GLM_FUNC_QUALIFIER static mat<4, 4, float, Q> call(mat<4, 4, float, Q> const& m)
+		template<qualifier Q>
+		struct compute_transpose<4, 4, float, Q, true>
 		{
-			mat<4, 4, float, Q> Result;
-			glm_mat4_transpose(&m[0].data, &Result[0].data);
-			return Result;
-		}
-	};
+			GLM_FUNC_QUALIFIER static mat<4, 4, float, Q> call(mat<4, 4, float, Q> const& m)
+			{
+				mat<4, 4, float, Q> Result;
+				glm_mat4_transpose(&m[0].data, &Result[0].data);
+				return Result;
+			}
+		};
 
-	template<qualifier Q>
-	struct compute_determinant<4, 4, float, Q, true>
-	{
-		GLM_FUNC_QUALIFIER static float call(mat<4, 4, float, Q> const& m)
+		template<qualifier Q>
+		struct compute_determinant<4, 4, float, Q, true>
 		{
-			return _mm_cvtss_f32(glm_mat4_determinant(&m[0].data));
-		}
-	};
+			GLM_FUNC_QUALIFIER static float call(mat<4, 4, float, Q> const& m)
+			{
+				return _mm_cvtss_f32(glm_mat4_determinant(&m[0].data));
+			}
+		};
 
-	template<qualifier Q>
-	struct compute_inverse<4, 4, float, Q, true>
-	{
-		GLM_FUNC_QUALIFIER static mat<4, 4, float, Q> call(mat<4, 4, float, Q> const& m)
+		template<qualifier Q>
+		struct compute_inverse<4, 4, float, Q, true>
 		{
-			mat<4, 4, float, Q> Result;
-			glm_mat4_inverse(&m[0].data, &Result[0].data);
-			return Result;
-		}
-	};
-}//namespace detail
+			GLM_FUNC_QUALIFIER static mat<4, 4, float, Q> call(mat<4, 4, float, Q> const& m)
+			{
+				mat<4, 4, float, Q> Result;
+				glm_mat4_inverse(&m[0].data, &Result[0].data);
+				return Result;
+			}
+		};
+	}//namespace detail
 
 #	if GLM_CONFIG_ALIGNED_GENTYPES == GLM_ENABLE
 	template<>
@@ -97,8 +97,8 @@ namespace glm {
 #if GLM_LANG & GLM_LANG_CXX11_FLAG
 	template <qualifier Q>
 	GLM_FUNC_QUALIFIER
-	typename std::enable_if<detail::is_aligned<Q>::value, mat<4, 4, float, Q>>::type
-	operator*(mat<4, 4, float, Q> const & m1, mat<4, 4, float, Q> const & m2)
+		typename std::enable_if<detail::is_aligned<Q>::value, mat<4, 4, float, Q>>::type
+		operator*(mat<4, 4, float, Q> const& m1, mat<4, 4, float, Q> const& m2)
 	{
 		auto MulRow = [&](int l) {
 			float32x4_t const SrcA = m2[l].data;
@@ -142,7 +142,7 @@ namespace glm {
 				float32x4_t w1 = neon::copy_lane(neon::dupq_lane(m3, 3), 3, m2, 3);
 				float32x4_t w2 = neon::copy_lane(neon::dupq_lane(m3, 2), 3, m2, 2);
 				float32x4_t w3 = vcombine_f32(neon::dup_lane(m2, 3), neon::dup_lane(m1, 3));
-				Fac0 = w0 * w1 -  w2 * w3;
+				Fac0 = w0 * w1 - w2 * w3;
 			}
 
 			// m[2][1] * m[3][3] - m[3][1] * m[2][3];
@@ -225,10 +225,10 @@ namespace glm {
 			float32x4_t Inv2 = Vec0 * Fac1 - Vec1 * Fac3 + Vec3 * Fac5;
 			float32x4_t Inv3 = Vec0 * Fac2 - Vec1 * Fac4 + Vec2 * Fac5;
 
-			float32x4_t r0 = float32x4_t{-1, +1, -1, +1} * Inv0;
-			float32x4_t r1 = float32x4_t{+1, -1, +1, -1} * Inv1;
-			float32x4_t r2 = float32x4_t{-1, +1, -1, +1} * Inv2;
-			float32x4_t r3 = float32x4_t{+1, -1, +1, -1} * Inv3;
+			float32x4_t r0 = float32x4_t{ -1, +1, -1, +1 } *Inv0;
+			float32x4_t r1 = float32x4_t{ +1, -1, +1, -1 } *Inv1;
+			float32x4_t r2 = float32x4_t{ -1, +1, -1, +1 } *Inv2;
+			float32x4_t r3 = float32x4_t{ +1, -1, +1, -1 } *Inv3;
 
 			float32x4_t det = neon::mul_lane(r0, m0, 0);
 			det = neon::madd_lane(det, r1, m0, 1);

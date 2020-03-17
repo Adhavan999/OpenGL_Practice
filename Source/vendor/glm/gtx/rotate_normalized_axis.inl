@@ -8,7 +8,7 @@ namespace glm
 		mat<4, 4, T, Q> const& m,
 		T const& angle,
 		vec<3, T, Q> const& v
-	)
+		)
 	{
 		T const a = angle;
 		T const c = cos(a);
@@ -45,7 +45,7 @@ namespace glm
 		qua<T, Q> const& q,
 		T const& angle,
 		vec<3, T, Q> const& v
-	)
+		)
 	{
 		vec<3, T, Q> const Tmp(v);
 

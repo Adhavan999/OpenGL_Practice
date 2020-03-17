@@ -6,7 +6,7 @@ namespace glm
 	GLM_FUNC_QUALIFIER vec<3, T, Q> polar
 	(
 		vec<3, T, Q> const& euclidean
-	)
+		)
 	{
 		T const Length(length(euclidean));
 		vec<3, T, Q> const tmp(euclidean / Length);
@@ -22,7 +22,7 @@ namespace glm
 	GLM_FUNC_QUALIFIER vec<3, T, Q> euclidean
 	(
 		vec<2, T, Q> const& polar
-	)
+		)
 	{
 		T const latitude(polar.x);
 		T const longitude(polar.y);
@@ -32,5 +32,4 @@ namespace glm
 			sin(latitude),
 			cos(latitude) * cos(longitude));
 	}
-
 }//namespace glm

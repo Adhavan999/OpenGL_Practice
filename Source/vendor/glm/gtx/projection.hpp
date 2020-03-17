@@ -27,7 +27,6 @@ namespace glm
 {
 	/// @addtogroup gtx_projection
 	/// @{
-
 	/// Projects x on Normal.
 	///
 	/// @param[in] x A vector to project

@@ -8,7 +8,7 @@ namespace glm
 		vec<3, T, Q> const& x,
 		vec<3, T, Q> const& y,
 		T const& a
-	)
+		)
 	{
 		// get cosine of angle between vectors (-1 -> 1)
 		T CosAlpha = dot(x, y);
@@ -29,7 +29,7 @@ namespace glm
 	(
 		vec<2, T, Q> const& v,
 		T const& angle
-	)
+		)
 	{
 		vec<2, T, Q> Result;
 		T const Cos(cos(angle));
@@ -46,7 +46,7 @@ namespace glm
 		vec<3, T, Q> const& v,
 		T const& angle,
 		vec<3, T, Q> const& normal
-	)
+		)
 	{
 		return mat<3, 3, T, Q>(glm::rotate(angle, normal)) * v;
 	}
@@ -68,7 +68,7 @@ namespace glm
 		vec<4, T, Q> const& v,
 		T const& angle,
 		vec<3, T, Q> const& normal
-	)
+		)
 	{
 		return rotate(angle, normal) * v;
 	}
@@ -78,7 +78,7 @@ namespace glm
 	(
 		vec<3, T, Q> const& v,
 		T const& angle
-	)
+		)
 	{
 		vec<3, T, Q> Result(v);
 		T const Cos(cos(angle));
@@ -94,13 +94,13 @@ namespace glm
 	(
 		vec<3, T, Q> const& v,
 		T const& angle
-	)
+		)
 	{
 		vec<3, T, Q> Result = v;
 		T const Cos(cos(angle));
 		T const Sin(sin(angle));
 
-		Result.x =  v.x * Cos + v.z * Sin;
+		Result.x = v.x * Cos + v.z * Sin;
 		Result.z = -v.x * Sin + v.z * Cos;
 		return Result;
 	}
@@ -110,7 +110,7 @@ namespace glm
 	(
 		vec<3, T, Q> const& v,
 		T const& angle
-	)
+		)
 	{
 		vec<3, T, Q> Result = v;
 		T const Cos(cos(angle));
@@ -126,7 +126,7 @@ namespace glm
 	(
 		vec<4, T, Q> const& v,
 		T const& angle
-	)
+		)
 	{
 		vec<4, T, Q> Result = v;
 		T const Cos(cos(angle));
@@ -142,13 +142,13 @@ namespace glm
 	(
 		vec<4, T, Q> const& v,
 		T const& angle
-	)
+		)
 	{
 		vec<4, T, Q> Result = v;
 		T const Cos(cos(angle));
 		T const Sin(sin(angle));
 
-		Result.x =  v.x * Cos + v.z * Sin;
+		Result.x = v.x * Cos + v.z * Sin;
 		Result.z = -v.x * Sin + v.z * Cos;
 		return Result;
 	}
@@ -158,7 +158,7 @@ namespace glm
 	(
 		vec<4, T, Q> const& v,
 		T const& angle
-	)
+		)
 	{
 		vec<4, T, Q> Result = v;
 		T const Cos(cos(angle));
@@ -174,9 +174,9 @@ namespace glm
 	(
 		vec<3, T, Q> const& Normal,
 		vec<3, T, Q> const& Up
-	)
+		)
 	{
-		if(all(equal(Normal, Up, epsilon<T>())))
+		if (all(equal(Normal, Up, epsilon<T>())))
 			return mat<4, 4, T, Q>(static_cast<T>(1));
 
 		vec<3, T, Q> RotationAxis = cross(Up, Normal);

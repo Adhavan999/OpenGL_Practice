@@ -8,7 +8,7 @@ namespace glm
 		vec<3, T, Q> const& p1,
 		vec<3, T, Q> const& p2,
 		vec<3, T, Q> const& p3
-	)
+		)
 	{
 		return normalize(cross(p1 - p2, p1 - p3));
 	}

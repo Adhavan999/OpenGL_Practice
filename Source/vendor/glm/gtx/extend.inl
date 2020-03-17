@@ -8,7 +8,7 @@ namespace glm
 		genType const& Origin,
 		genType const& Source,
 		genType const& Distance
-	)
+		)
 	{
 		return Origin + (Source - Origin) * Distance;
 	}
@@ -19,7 +19,7 @@ namespace glm
 		vec<2, T, Q> const& Origin,
 		vec<2, T, Q> const& Source,
 		T const& Distance
-	)
+		)
 	{
 		return Origin + (Source - Origin) * Distance;
 	}
@@ -30,7 +30,7 @@ namespace glm
 		vec<3, T, Q> const& Origin,
 		vec<3, T, Q> const& Source,
 		T const& Distance
-	)
+		)
 	{
 		return Origin + (Source - Origin) * Distance;
 	}
@@ -41,7 +41,7 @@ namespace glm
 		vec<4, T, Q> const& Origin,
 		vec<4, T, Q> const& Source,
 		T const& Distance
-	)
+		)
 	{
 		return Origin + (Source - Origin) * Distance;
 	}

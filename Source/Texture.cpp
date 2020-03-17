@@ -3,11 +3,11 @@
 
 Texture::Texture(const std::string& path)
 	:m_RendererID(0), m_ActiveSlot(0), m_FilePath(path), m_LocalBuffer(nullptr),
-	 m_Width(0), m_Height(0), m_BPP(0)
+	m_Width(0), m_Height(0), m_BPP(0)
 {
 	stbi_set_flip_vertically_on_load(1);
 	m_LocalBuffer = stbi_load(path.c_str(), &m_Width, &m_Height, &m_BPP, 4);
-	
+
 	GLCall(glGenTextures(1, &m_RendererID));
 	GLCall(glBindTexture(GL_TEXTURE_2D, m_RendererID));
 
@@ -23,8 +23,7 @@ Texture::Texture(const std::string& path)
 		stbi_image_free(m_LocalBuffer);
 }
 
-
-void Texture::Bind(unsigned int slot) 
+void Texture::Bind(unsigned int slot)
 {
 	m_ActiveSlot = slot;
 	GLCall(glActiveTexture(GL_TEXTURE0 + slot));
@@ -46,11 +45,11 @@ template<>
 void Texture::SetParameter<int>(unsigned int target, unsigned int parametername, int const parameter)
 {
 	GLCall(glActiveTexture(GL_TEXTURE0 + m_ActiveSlot))
-	GLCall(glTexParameteri(target, parametername, parameter));
+		GLCall(glTexParameteri(target, parametername, parameter));
 }
 
 template<>
-void Texture::SetParameter<float>(unsigned int target, unsigned int parametername,float const parameter)
+void Texture::SetParameter<float>(unsigned int target, unsigned int parametername, float const parameter)
 {
 	GLCall(glActiveTexture(GL_TEXTURE0 + m_ActiveSlot))
 		GLCall(glTexParameterf(target, parametername, parameter));
@@ -60,14 +59,14 @@ template<>
 void Texture::SetParameter<float*>(unsigned int target, unsigned int parametername, float* const parameter)
 {
 	GLCall(glActiveTexture(GL_TEXTURE0 + m_ActiveSlot))
-	GLCall(glTexParameterfv(target, parametername, parameter));
+		GLCall(glTexParameterfv(target, parametername, parameter));
 }
 
 template<>
 void Texture::SetParameter<int*>(unsigned int target, unsigned int parametername, int* const parameter)
 {
 	GLCall(glActiveTexture(GL_TEXTURE0 + m_ActiveSlot))
-	GLCall(glTexParameteriv(target, parametername, parameter));
+		GLCall(glTexParameteriv(target, parametername, parameter));
 }
 
 Texture::~Texture()

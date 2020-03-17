@@ -7,15 +7,15 @@ namespace glm
 	(
 		genType const& orig, genType const& dir,
 		genType const& planeOrig, genType const& planeNormal,
-		typename genType::value_type & intersectionDistance
-	)
+		typename genType::value_type& intersectionDistance
+		)
 	{
 		typename genType::value_type d = glm::dot(dir, planeNormal);
 		typename genType::value_type Epsilon = std::numeric_limits<typename genType::value_type>::epsilon();
 
-		if(glm::abs(d) > Epsilon)  // if dir and planeNormal are not perpendicular
+		if (glm::abs(d) > Epsilon)  // if dir and planeNormal are not perpendicular
 		{
-			typename genType::value_type const tmp_intersectionDistance = 	glm::dot(planeOrig - orig, planeNormal) / d;
+			typename genType::value_type const tmp_intersectionDistance = glm::dot(planeOrig - orig, planeNormal) / d;
 			if (tmp_intersectionDistance > static_cast<typename genType::value_type>(0)) { // allow only intersections
 				intersectionDistance = tmp_intersectionDistance;
 				return true;
@@ -31,7 +31,7 @@ namespace glm
 		vec<3, T, Q> const& orig, vec<3, T, Q> const& dir,
 		vec<3, T, Q> const& vert0, vec<3, T, Q> const& vert1, vec<3, T, Q> const& vert2,
 		vec<2, T, Q>& baryPosition, T& distance
-	)
+		)
 	{
 		// find vectors for two edges sharing vert0
 		vec<3, T, Q> const edge1 = vert1 - vert0;
@@ -45,14 +45,14 @@ namespace glm
 
 		vec<3, T, Q> Perpendicular(0);
 
-		if(det > std::numeric_limits<T>::epsilon())
+		if (det > std::numeric_limits<T>::epsilon())
 		{
 			// calculate distance from vert0 to ray origin
 			vec<3, T, Q> const dist = orig - vert0;
 
 			// calculate U parameter and test bounds
 			baryPosition.x = glm::dot(dist, p);
-			if(baryPosition.x < static_cast<T>(0) || baryPosition.x > det)
+			if (baryPosition.x < static_cast<T>(0) || baryPosition.x > det)
 				return false;
 
 			// prepare to test V parameter
@@ -60,17 +60,17 @@ namespace glm
 
 			// calculate V parameter and test bounds
 			baryPosition.y = glm::dot(dir, Perpendicular);
-			if((baryPosition.y < static_cast<T>(0)) || ((baryPosition.x + baryPosition.y) > det))
+			if ((baryPosition.y < static_cast<T>(0)) || ((baryPosition.x + baryPosition.y) > det))
 				return false;
 		}
-		else if(det < -std::numeric_limits<T>::epsilon())
+		else if (det < -std::numeric_limits<T>::epsilon())
 		{
 			// calculate distance from vert0 to ray origin
 			vec<3, T, Q> const dist = orig - vert0;
 
 			// calculate U parameter and test bounds
 			baryPosition.x = glm::dot(dist, p);
-			if((baryPosition.x > static_cast<T>(0)) || (baryPosition.x < det))
+			if ((baryPosition.x > static_cast<T>(0)) || (baryPosition.x < det))
 				return false;
 
 			// prepare to test V parameter
@@ -78,7 +78,7 @@ namespace glm
 
 			// calculate V parameter and test bounds
 			baryPosition.y = glm::dot(dir, Perpendicular);
-			if((baryPosition.y > static_cast<T>(0)) || (baryPosition.x + baryPosition.y < det))
+			if ((baryPosition.y > static_cast<T>(0)) || (baryPosition.x + baryPosition.y < det))
 				return false;
 		}
 		else
@@ -98,8 +98,8 @@ namespace glm
 	(
 		genType const& orig, genType const& dir,
 		genType const& vert0, genType const& vert1, genType const& vert2,
-		genType & position
-	)
+		genType& position
+		)
 	{
 		typename genType::value_type Epsilon = std::numeric_limits<typename genType::value_type>::epsilon();
 
@@ -136,18 +136,18 @@ namespace glm
 	(
 		genType const& rayStarting, genType const& rayNormalizedDirection,
 		genType const& sphereCenter, const typename genType::value_type sphereRadiusSquered,
-		typename genType::value_type & intersectionDistance
-	)
+		typename genType::value_type& intersectionDistance
+		)
 	{
 		typename genType::value_type Epsilon = std::numeric_limits<typename genType::value_type>::epsilon();
 		genType diff = sphereCenter - rayStarting;
 		typename genType::value_type t0 = dot(diff, rayNormalizedDirection);
 		typename genType::value_type dSquared = dot(diff, diff) - t0 * t0;
-		if( dSquared > sphereRadiusSquered )
+		if (dSquared > sphereRadiusSquered)
 		{
 			return false;
 		}
-		typename genType::value_type t1 = sqrt( sphereRadiusSquered - dSquared );
+		typename genType::value_type t1 = sqrt(sphereRadiusSquered - dSquared);
 		intersectionDistance = t0 > t1 + Epsilon ? t0 - t1 : t0 + t1;
 		return intersectionDistance > Epsilon;
 	}
@@ -157,11 +157,11 @@ namespace glm
 	(
 		genType const& rayStarting, genType const& rayNormalizedDirection,
 		genType const& sphereCenter, const typename genType::value_type sphereRadius,
-		genType & intersectionPosition, genType & intersectionNormal
-	)
+		genType& intersectionPosition, genType& intersectionNormal
+		)
 	{
 		typename genType::value_type distance;
-		if( intersectRaySphere( rayStarting, rayNormalizedDirection, sphereCenter, sphereRadius * sphereRadius, distance ) )
+		if (intersectRaySphere(rayStarting, rayNormalizedDirection, sphereCenter, sphereRadius * sphereRadius, distance))
 		{
 			intersectionPosition = rayStarting + rayNormalizedDirection * distance;
 			intersectionNormal = (intersectionPosition - sphereCenter) / sphereRadius;
@@ -175,21 +175,21 @@ namespace glm
 	(
 		genType const& point0, genType const& point1,
 		genType const& sphereCenter, typename genType::value_type sphereRadius,
-		genType & intersectionPoint1, genType & intersectionNormal1,
-		genType & intersectionPoint2, genType & intersectionNormal2
-	)
+		genType& intersectionPoint1, genType& intersectionNormal1,
+		genType& intersectionPoint2, genType& intersectionNormal2
+		)
 	{
 		typename genType::value_type Epsilon = std::numeric_limits<typename genType::value_type>::epsilon();
 		genType dir = normalize(point1 - point0);
 		genType diff = sphereCenter - point0;
 		typename genType::value_type t0 = dot(diff, dir);
 		typename genType::value_type dSquared = dot(diff, diff) - t0 * t0;
-		if( dSquared > sphereRadius * sphereRadius )
+		if (dSquared > sphereRadius * sphereRadius)
 		{
 			return false;
 		}
-		typename genType::value_type t1 = sqrt( sphereRadius * sphereRadius - dSquared );
-		if( t0 < t1 + Epsilon )
+		typename genType::value_type t1 = sqrt(sphereRadius * sphereRadius - dSquared);
+		if (t0 < t1 + Epsilon)
 			t1 = -t1;
 		intersectionPoint1 = point0 + dir * (t0 - t1);
 		intersectionNormal1 = (intersectionPoint1 - sphereCenter) / sphereRadius;

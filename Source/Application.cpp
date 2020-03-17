@@ -46,11 +46,10 @@ int main(void)
 	ImGui_ImplOpenGL3_Init();
 
 	ImGui::StyleColorsDark();
-		
+
 	GLCall(glEnable(GL_BLEND));
 	GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
-		
 	Renderer renderer;
 
 	test::TestClearColor test;
@@ -67,13 +66,13 @@ int main(void)
 		test.OnRender();
 		test.OnImGuiRender();
 
-		ImGui::Render();	
+		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
-	
+
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplGlfw_Shutdown();
 	ImGui::DestroyContext();

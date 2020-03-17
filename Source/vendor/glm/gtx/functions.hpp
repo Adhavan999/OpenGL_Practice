@@ -30,7 +30,6 @@ namespace glm
 {
 	/// @addtogroup gtx_functions
 	/// @{
-
 	/// 1D gauss function
 	///
 	/// @see gtc_epsilon
@@ -53,4 +52,3 @@ namespace glm
 }//namespace glm
 
 #include "functions.inl"
-
