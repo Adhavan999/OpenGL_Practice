@@ -6,9 +6,9 @@
 #include "imgui/imgui_impl_opengl3.h"
 
 #include <iostream>
-#include "Renderer.h"
 
 #include "tests/TestClearColor.h"
+#include "tests/TestDannyDevito.h"
 
 int main(void)
 {
@@ -50,22 +50,20 @@ int main(void)
 	GLCall(glEnable(GL_BLEND));
 	GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
-	Renderer renderer;
-
-	test::TestClearColor test;
+	test::Test *test;
+	test = new test::TestDannyDevito;
 
 	while (!glfwWindowShouldClose(window))
 	{
-		renderer.Clear();
 
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
 
-		test.OnUpdate(0.0f);
-		test.OnRender();
-		test.OnImGuiRender();
-
+		test->OnUpdate(0.0f);
+		test->OnRender();
+		test->OnImGuiRender();
+		
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
@@ -73,6 +71,7 @@ int main(void)
 		glfwPollEvents();
 	}
 
+	delete test;
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplGlfw_Shutdown();
 	ImGui::DestroyContext();

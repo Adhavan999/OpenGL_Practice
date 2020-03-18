@@ -1,4 +1,5 @@
 #pragma once
+#include <Renderer.h>
 namespace test {
 	class Test {
 	public:
