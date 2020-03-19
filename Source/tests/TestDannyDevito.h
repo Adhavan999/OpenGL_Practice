@@ -35,7 +35,7 @@ namespace test
 
 	public:
 		TestDannyDevito();
-		~TestDannyDevito();
+		~TestDannyDevito() override;
 
 		void OnUpdate(float deltaTime) override;
 		void OnRender() override;
