@@ -1,5 +1,5 @@
 # OpenGL Practice
-### Made by following [The Cherno](https://www.youtube.com/user/TheChernoProject) OpenGL playlist and learnopengl.com
+### Made by following [The Cherno](https://www.youtube.com/user/TheChernoProject) OpenGL playlist and [learnopengl.com](https://learnopengl.com/)
 
 This contains abstraction layers for various OpenGL concepts such as Textures, VAOs, Shaders, ect.
 
